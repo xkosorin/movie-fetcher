@@ -6,14 +6,16 @@ const initialState: MoviesState = {
   loading: false,
   movies: [],
   error: undefined,
+  searchTerm: "",
 };
 
 const moviesSlice = createSlice({
   name: "movies",
   initialState,
   reducers: {
-    getMoviesFetch: (state) => {
+    getMoviesFetch: (state, action: PayloadAction<string>) => {
       state.loading = true;
+      state.searchTerm = action.payload;
     },
     getMoviesSuccess: (state, action: PayloadAction<IMovie[]>) => {
       state.loading = false;

@@ -1,13 +1,13 @@
+import { ReactNode } from "react";
 import { useParams } from "react-router-dom";
-import { IMovie } from "../types/Movies";
 import { useSelector } from "react-redux";
 import { getMovieById } from "../store/movies/moviesSlice";
+import { IMovie } from "../types/Movies";
 import { RootState } from "../types/States";
-
-import styles from "../styles/Movie.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { ReactNode } from "react";
+
+import styles from "../styles/Movie.module.scss";
 
 type JSONValue = string | number | boolean | Record<string, string>[];
 

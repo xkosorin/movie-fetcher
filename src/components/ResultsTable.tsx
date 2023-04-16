@@ -4,9 +4,11 @@ import { IMovie } from "../types/Movies";
 import { getMovies } from "../store/movies/moviesSlice";
 
 import styles from "../styles/Table.module.scss";
+import { RootState } from "../types/States";
 
 const ResultsTable = () => {
   const movies: IMovie[] = useSelector(getMovies);
+  const loading: boolean = useSelector((state: RootState) => state.movies.loading)
 
   return (
     <table className={styles.table}>

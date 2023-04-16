@@ -1,6 +1,6 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import {
   getMoviesFailure,
   getMoviesFetch,
@@ -19,6 +19,8 @@ interface FetchMoviesResponse {
 
 function* fetchMoviesSaga(action: PayloadAction<string>): Generator {
   try {
+    const { payload } = action;
+
     const response: AxiosResponse<FetchMoviesResponse> = (yield call(
       axios.get,
       `${import.meta.env.VITE_API_URL}?apikey=${
@@ -49,8 +51,8 @@ function* fetchMovieByIdSaga(action: PayloadAction<string>): Generator {
 }
 
 function* moviesSaga() {
-  yield takeEvery(getMoviesFetch.type, fetchMoviesSaga);
-  yield takeEvery(getSingleMovieFetch.type, fetchMovieByIdSaga);
+  yield takeLatest(getMoviesFetch.type, fetchMoviesSaga);
+  yield takeLatest(getSingleMovieFetch.type, fetchMovieByIdSaga);
 }
 
 export default moviesSaga;

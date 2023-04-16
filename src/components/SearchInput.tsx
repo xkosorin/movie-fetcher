@@ -4,16 +4,15 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "../styles/Input.module.scss";
 
-const SearchInput = forwardRef<HTMLInputElement>((_, ref) => {
+interface Props {
+  handleSubmit(e: React.FormEvent<HTMLFormElement>): void;
+}
+
+const SearchInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
   const [input, setInput] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    ref && console.log(ref.current.value);
-  };
-
   return (
-    <form className={styles.container} onSubmit={handleSubmit}>
+    <form className={styles.container} onSubmit={props.handleSubmit}>
       <input
         type="text"
         placeholder="Search for movies..."
