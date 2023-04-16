@@ -1,0 +1,57 @@
+.tableRow {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  justify-items: center;
+  height: 60px;
+
+  .movieImage {
+    flex-shrink: 0;
+    width: 10%;
+    height: 100%;
+
+    .image {
+      border-radius: 50%;
+      aspect-ratio: 1 / 1;
+      height: 100%;
+    }
+  }
+
+  .movieInfo {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+
+    .movieTitle {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .movieYear {
+      font-size: 14px;
+      color: #888;
+    }
+  }
+
+  .movieGenre {
+    width: 40%;
+    height: auto;
+  }
+
+  .movieRating {
+    width: 15%;
+    height: auto;
+  }
+
+  .movieLiked {
+    width: 5%;
+    height: auto;
+  }
+
+  &:hover {
+    background-color: #eee;
+  }
+}

@@ -1,0 +1,75 @@
+$input-border-color: #ced4da;
+$input-focus-border-color: #80bdff;
+$input-background-color: #ffffff;
+$input-placeholder-color: #6c757d;
+
+.container {
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+
+  input {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #495057;
+    background-color: $input-background-color;
+    background-clip: padding-box;
+    border: 1px solid $input-border-color;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+      border-color: $input-focus-border-color;
+      box-shadow: 0 0 0 0.2rem rgba($input-focus-border-color, 0.25);
+    }
+
+    &::placeholder {
+      color: $input-placeholder-color;
+      opacity: 1;
+    }
+
+    &::-webkit-input-placeholder {
+      color: $input-placeholder-color;
+    }
+
+    &::-moz-placeholder {
+      color: $input-placeholder-color;
+    }
+
+    &:-ms-input-placeholder {
+      color: $input-placeholder-color;
+    }
+
+    &::-ms-input-placeholder {
+      color: $input-placeholder-color;
+    }
+
+    &::placeholder {
+      color: $input-placeholder-color;
+    }
+  }
+
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    font-size: 18px;
+    color: $input-placeholder-color;
+    background: none;
+    border: none;
+    transform: translateY(-50%);
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+    i {
+      pointer-events: none;
+    }
+  }
+}

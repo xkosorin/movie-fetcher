@@ -1,0 +1,46 @@
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 16px;
+  width: 100%;
+  height: 100vh;
+
+  .title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 3em 0;
+
+    .title {
+      font-size: 36px;
+      font-weight: 700;
+    }
+
+    .liked {
+      font-size: 20px;
+    }
+  }
+
+
+  .grid {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 20px;
+
+    .poster {
+      height: 100%;
+      width: 100%;
+    }
+  
+    .info {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 15px;
+  
+      .param {
+        font-weight: 600;
+      }
+    }
+  }
+
+}
