@@ -7,15 +7,25 @@ import { RootState } from "../types/States";
 import styles from "../styles/Movie.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { ReactNode } from "react";
+
+type JSONValue = string | number | boolean | Record<string, string>[];
+
+type EntriesArray = [string, JSONValue][];
 
 const Movie = () => {
   const { id } = useParams();
 
-  var movieObj: IMovie | undefined;
+  var movieObj: IMovie | undefined = undefined;
 
   if (id) movieObj = useSelector((state: RootState) => getMovieById(state, id));
 
-  console.log(movieObj);
+  var entries: EntriesArray | undefined = undefined;
+  var unwantedKeys = ["Poster", "Title"];
+  if (movieObj)
+    entries = Object.entries(movieObj).filter(
+      ([key]) => !unwantedKeys.includes(key)
+    );
 
   return (
     <div className={styles.container}>
@@ -30,10 +40,23 @@ const Movie = () => {
           <img src={movieObj?.Poster} />
         </div>
         <div className={styles.info}>
-          {for (const attr in movieObj) {
-                        <div className={styles.param}>Param:</div>
-                        <div className={styles.text}>Text</div>
-          }}
+          {entries &&
+            entries.map(([key, value], idx) => {
+              if (key === "Ratings") {
+                value = (value as Record<string, string>[])
+                  .map((rating) => `${rating.Source}: ${rating.Value}`)
+                  .join(", ");
+              }
+
+              return (
+                <>
+                  <div key={idx} className={styles.param}>
+                    {key}:
+                  </div>
+                  <div>{value as ReactNode}</div>
+                </>
+              );
+            })}
         </div>
       </div>
     </div>
