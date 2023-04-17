@@ -5,6 +5,7 @@
   border-bottom: 1px solid #ccc;
   width: 100%;
   justify-items: center;
+  justify-content: space-between;
   height: 60px;
 
   .movieImage {
@@ -22,7 +23,7 @@
   .movieInfo {
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 80%;
 
     .movieTitle {
       font-size: 16px;
@@ -36,18 +37,8 @@
     }
   }
 
-  .movieGenre {
-    width: 40%;
-    height: auto;
-  }
-
-  .movieRating {
-    width: 15%;
-    height: auto;
-  }
-
   .movieLiked {
-    width: 5%;
+    width: 10%;
     height: auto;
   }
 

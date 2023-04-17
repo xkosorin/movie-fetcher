@@ -1,10 +1,14 @@
-import { IMovie } from "./Movies";
+import { IMovie, IMovieDetail } from "./Movies";
 
 export interface MoviesState {
   loading: boolean;
   movies: IMovie[];
-  error: string | undefined;
+  movieDetails: IMovieDetail | null;
+  error: string | null;
   searchTerm: string;
+  favorites: IMovie[];
+  currentPage: number;
+  totalPages: number;
 }
 
 export interface RootState {

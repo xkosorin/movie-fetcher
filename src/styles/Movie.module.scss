@@ -36,15 +36,17 @@
     }
   
     .info {
-      display: grid;
-      grid-template-columns: 1fr 4fr;
-      grid-row-gap: 10px;
-      grid-column-gap: 25px;
-      box-sizing: border-box;
-      width: 100%;
-  
-      .param {
-        font-weight: 600;
+      span {
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        grid-column-gap: 25px;
+        box-sizing: border-box;
+        width: 100%;
+        margin-bottom: 10px;
+    
+        .param {
+          font-weight: 600;
+        }
       }
     }
   }

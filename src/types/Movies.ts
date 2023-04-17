@@ -3,7 +3,7 @@ export interface IRating {
   Value: string;
 }
 
-export interface IMovie {
+export interface IMovieDetail {
   Title: string;
   Year: string;
   Rated: string;
@@ -26,4 +26,12 @@ export interface IMovie {
   Type: string;
   totalSeasons: string;
   Response: string;
+}
+
+export interface IMovie {
+  Title: string;
+  Year: string;
+  Poster: string;
+  Type: string;
+  imdbID: string;
 }

@@ -1,25 +1,38 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { MouseEvent } from "react";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styles from "../styles/TableRow.module.scss";
+import { useDispatch } from "react-redux";
+import {
+  addToFavorites,
+  getFavoriteMovies,
+  removeFromFavorites,
+} from "../store/movies/moviesSlice";
+import { IMovie } from "../types/Movies";
+import { useSelector } from "react-redux";
 
 interface Props {
-  movieId: string;
-  img: string;
-  title: string;
-  year: string;
-  genre: string;
-  rating: string;
-  favorite: boolean;
+  movie: IMovie;
 }
 
 const TableRow = (props: Props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleFavoriteClick = (e: MouseEvent) => {
-    console.log("Added to favorite");
+  const favorites: IMovie[] = useSelector(getFavoriteMovies);
+
+  const isFavorite: boolean = favorites.some(
+    (movie) => movie.imdbID === props.movie.imdbID
+  );
+
+  const handleAddToFavoritesClick = () => {
+    dispatch(addToFavorites(props.movie));
+  };
+
+  const handleRemoveFromFavoritesClick = () => {
+    dispatch(removeFromFavorites(props.movie));
   };
 
   const handleTitleClick = (movieID: string) => {
@@ -29,23 +42,27 @@ const TableRow = (props: Props) => {
   return (
     <tr className={styles.tableRow}>
       <td className={styles.movieImage}>
-        <img src={props.img} className={styles.image} />
+        <img src={props.movie.Poster} className={styles.image} />
       </td>
       <td
         className={styles.movieInfo}
-        onClick={(_) => handleTitleClick(props.movieId)}
+        onClick={(_) => handleTitleClick(props.movie.imdbID)}
       >
-        <span className={styles.movieTitle}>{props.title}</span>
-        <span className={styles.movieYear}>{props.year}</span>
+        <span className={styles.movieTitle}>{props.movie.Title}</span>
+        <span className={styles.movieYear}>{props.movie.Year}</span>
       </td>
-      <td className={styles.movieGenre}>{props.genre}</td>
-      <td className={styles.movieRating}>{props.rating}</td>
       <td className={styles.movieLiked}>
-        {props.favorite && (
+        {isFavorite ? (
           <FontAwesomeIcon
             icon={faHeart}
-            onClick={(e) => handleFavoriteClick(e)}
             style={{ cursor: "pointer" }}
+            onClick={handleRemoveFromFavoritesClick}
+          />
+        ) : (
+          <FontAwesomeIcon
+            icon={faHeartRegular}
+            style={{ cursor: "pointer" }}
+            onClick={handleAddToFavoritesClick}
           />
         )}
       </td>
