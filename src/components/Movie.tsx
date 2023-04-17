@@ -7,12 +7,15 @@ import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 
 import styles from "../styles/Movie.module.scss";
 import {
+  addToFavorites,
   getError,
   getFavoriteMovies,
   getLoading,
   getMovieDetails,
   getSingleMovieFetch,
+  removeFromFavorites,
 } from "../store/movies/moviesSlice";
+import { IMovie } from "../types/Movies";
 
 type JSONValue = string | number | boolean | Record<string, string>[];
 type EntriesArray = [string, JSONValue][];
@@ -47,6 +50,28 @@ const Movie = () => {
 
   if (fetchError) return <>Fetching error!</>;
 
+  const handleAddToFavoritesClick = () => {
+    const movie: IMovie = {
+      Title: movieDetails?.Title!,
+      Year: movieDetails?.Year!,
+      Type: movieDetails?.Type!,
+      Poster: movieDetails?.Poster!,
+      imdbID: movieDetails?.imdbID!,
+    };
+    dispatch(addToFavorites(movie));
+  };
+
+  const handleRemoveFromFavoritesClick = () => {
+    const movie: IMovie = {
+      Title: movieDetails?.Title!,
+      Year: movieDetails?.Year!,
+      Type: movieDetails?.Type!,
+      Poster: movieDetails?.Poster!,
+      imdbID: movieDetails?.imdbID!,
+    };
+    dispatch(removeFromFavorites(movie));
+  };
+
   return (
     <div className={styles.container}>
       {loading ? (
@@ -59,11 +84,16 @@ const Movie = () => {
               {favorites.some(
                 (movie) => movie.imdbID === movieDetails?.imdbID
               ) ? (
-                <FontAwesomeIcon icon={faHeart} style={{ cursor: "pointer" }} />
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  style={{ cursor: "pointer" }}
+                  onClick={handleRemoveFromFavoritesClick}
+                />
               ) : (
                 <FontAwesomeIcon
                   icon={faHeartRegular}
                   style={{ cursor: "pointer" }}
+                  onClick={handleAddToFavoritesClick}
                 />
               )}
             </span>
